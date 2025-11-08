@@ -501,19 +501,14 @@ function chbot_options() {
         <form method="post" action="">
             <?php
 
-            $active_tab='activation';
-            if($settings['license_activation']==1)
-                $active_tab='general';
+            $active_tab='general';
             if(isset($_POST['active_tab']))
                 $active_tab=$_POST['active_tab'];
             ?>
-            <input type="text" name="active_tab" id="ew_active_tab" value="<?=(isset($_POST['active_tab'])?$_POST['active_tab']:'activation'); ?>" hidden >
-            <div class="atitle">افزونه کانال خودکار<span>نسخه 5.2.1</span> <span style="background:gainsboro;"><a href="https://eastweb.ir/wp-channel-plugin" target="_blank">دیدن خانه ی افزونه</a></span>&nbsp;<span style="background:gainsboro;"><a href="https://billing.eastweb.ir" target="_blank">پنل کاربری</a></span></div>
+            <input type="text" name="active_tab" id="ew_active_tab" value="<?=(isset($_POST['active_tab'])?$_POST['active_tab']:'general'); ?>" hidden >
+            <div class="atitle">افزونه کانال خودکار تلگرام<span>نسخه 6.0.0</span> <span style="background:gainsboro;"><a href="https://github.com/sajadnaeimi/telegram-wordpress-plugin" target="_blank">صفحه GitHub</a></span></div>
             <div class="wtitle">پنل اختصاصی مدیریت تنظیمات</div>
             <div class="tabs">
-                <?php if($settings['license_activation']!=1): ?>
-                <p id="tabactivation" href="#activation" data-target="activation"><i class="fa fa-check-circle eicon <?=($active_tab=='activation'?'active':'') ?>"></i> فعال سازی</p>
-                <?php endif; ?>
                 <p id="tabgeneral" href="#general" data-target="general"><i class="fa fa-gears eicon <?=($active_tab=='general'?'active':'') ?>"></i> تنظیمات همگانی</p>
                 <p id="tabchannels" href="#channels" data-target="channels"><i class="fa fa-telegram eicon <?=($active_tab=='channels'?'active':'') ?>"></i> کانال ها</p>
                 <p id="tabcontent" href="#content" data-target="content"><i class="fa fa-edit eicon <?=($active_tab=='content'?'active':'') ?>"></i> تنظیمات نوشته</p>
