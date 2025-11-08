@@ -1,0 +1,624 @@
+@font-face {
+    font-family: 'B Nazanin';
+    src: url('fonts/hinted-BNazaninBold.eot');
+    src: local('B Nazanin Bold'), local('BNazaninBold'),
+    url('fonts/hinted-BNazaninBold.eot?#iefix') format('embedded-opentype'),
+    url('fonts/hinted-BNazaninBold.woff') format('woff'),
+    url('fonts/hinted-BNazaninBold.ttf') format('truetype'),
+    url('fonts/hinted-BNazaninBold.svg#BNazaninBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'B Nazanin';
+    src: url('fonts/hinted-BNazanin.eot');
+    src: local('B Nazanin'), local('BNazanin'),
+    url('fonts/hinted-BNazanin.eot?#iefix') format('embedded-opentype'),
+    url('fonts/hinted-BNazanin.woff') format('woff'),
+    url('fonts/hinted-BNazanin.ttf') format('truetype'),
+    url('fonts/hinted-BNazanin.svg#BNazanin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+a {
+    text-decoration: none;
+    color: #555;
+    transition: all .3s ease-out
+}
+
+a:hover {
+    text-decoration: none;
+    color: #222
+}
+
+input, textarea {
+    border: none !important;
+    box-shadow: none !important;
+    width: 95%;
+    padding: 6px 0;
+    text-indent: 7px;
+    color: #444 !important;
+    font: 11px tahoma;
+    margin: 5px 0;
+    resize: none;
+    background: #fff !important;
+    border-radius: 3px
+}
+
+input:hover, textarea:hover {
+    border: 0 !important;
+    box-shadow: none !important
+}
+
+input:focus, textarea:focus {
+    border: 0 !important;
+    box-shadow: none !important
+}
+
+label {
+    vertical-align: initial
+}
+
+input[type=checkbox] {
+    visibility: hidden
+}
+
+.postform {
+    background: none repeat scroll 0 0 #555;
+    color: #fff;
+    border-radius: 3px;
+    border: 0 none;
+    float: left;
+    margin: 0 9px;
+    padding: 5px !important;
+    font: 11px tahoma;
+    height: 29px !important
+}
+
+hr {
+    border: 1px solid #f2f2f2 !important;
+    border-bottom: none !important
+}
+
+.wrap {
+    margin: 15px auto;
+    width: 95%;
+    background: none repeat scroll 0 0 #FFF;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 50px;
+    min-height: 595px
+}
+
+.atitle {
+    background: none repeat scroll 0 0 #444;
+    color: #FFF;
+    font: 16px b nazanin,nazanin, tahoma;
+    padding: 6px 8px
+}
+
+.atitle span {
+    display: inline-block;
+    font: 11px tahoma;
+    border-radius: 3px;
+    padding: 2px 4px 3px;
+    background: none repeat scroll 0 0 #333;
+    color: #aaa;
+    margin-right: 7px
+}
+
+.atitle:before, .wtitle:before {
+    content: " ";
+    background: url('img/eastweb.ir_icon.png') no-repeat scroll 0 0 transparent;
+    width: 38px;
+    height: 30px;
+    float: right;
+    margin: -2px 0 0 9px;
+}
+
+.wtitle:before {
+
+    width: 5px;
+    height: 7px;
+    margin: 5px 1px 0 6px
+}
+
+.wtitle {
+    padding: 7px 9px;
+    background: #d9d9d9;
+    font: 11px tahoma;
+    color: #888
+}
+
+.wtitle a {
+    float: left;
+    line-height: 15px;
+    color: #777
+}
+
+.tabs1 {
+    float: left;
+    width: 85%
+}
+
+.tabs1 .content {
+    margin: 9px 10px
+}
+
+.tabs1 .content p {
+    font: 13px b nazanin,nazanin, tahoma;
+    text-align: center;
+    color: #555
+}
+
+.tabs1 .content p span {
+    color: rgba(222, 49, 86, 0.8) !important;
+    font-size: 15px
+}
+
+.tabs1 .field {
+    width: 100%;
+    float: right
+}
+
+.tabs1 .fields {
+    margin: 5px 0;
+    text-align: right;
+    border: 2px solid #f2f2f2;
+    padding: 5px 0;
+    border-radius: 3px;
+    background: none repeat scroll 0 0 #f7f7f7;
+    font: 16px b nazanin,nazanin, tahoma;
+    display: inline-block;
+    width: 100%
+}
+
+.tabs1 .fields .title {
+    color: #555;
+    float: right;
+    margin: 3px 10px 3px 5px
+}
+
+.tabs1 .fields .title a {
+    font: 10px tahoma;
+    color: #aaa
+}
+
+.tabs1 .fields .title a:hover {
+    color: #666
+}
+
+.tabs1 .fields .des {
+    font: 10px tahoma;
+    color: #999;
+    float: right;
+    margin: 8px 0 0
+}
+
+.fields input, .fields textarea {
+    float: left;
+    margin: 2px 7px;
+    width: 50%;
+    background: #555 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3) inset, 0px 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transition: all .3s ease-out
+}
+
+.fields input:hover, .fields textarea:hover {
+    background: #444 !important
+}
+
+.fields textarea {
+    width: 55%;
+    height: 70px;
+    padding: 6px;
+    text-indent: 0
+}
+
+.tabs1 .fields .des a {
+    color: #999
+}
+
+.tabs1 .fields .des a:hover {
+    color: #666
+}
+
+.tabs1 .fields .dstb {
+    float: right;
+    width: 70%
+}
+
+.tabs1 .fields2 {
+    width: 48%;
+    margin: 5px
+}
+
+.tabs1 .fields2 input {
+    width: 40%
+}
+
+.tabs {
+    width: 15%;
+    background: none repeat scroll 0 0 #f7f7f7;
+    height: 100%;
+    position: absolute;
+    text-align: center
+}
+
+.tabs p {
+    padding: 6px 0;
+    float: right;
+    width: 100%;
+    text-align: right;
+    font: 13px b nazanin,nazanin, tahoma;
+    color: #666;
+    background: none repeat scroll 0 0 #f7f7f7;
+    border-bottom: 1px solid #FFF;
+    box-shadow: none;
+    text-indent: 10px;
+    margin: 0;
+    cursor: pointer;
+    transition: all .3s ease-out
+}
+
+.tabs p:hover {
+    background: #f2f2f2
+}
+
+.tabs2.fields {
+    border: 2px solid rgba(151, 192, 36, 0.4);
+    background: rgba(152, 192, 38, 0.1)
+}
+
+.tabs2 i {
+    font: 11px tahoma;
+    background: rgba(151, 192, 36, 0.4);
+    color: #7b9c1d;
+    padding: 1px 5px 2px;
+    border-radius: 3px;
+    margin: 6px -4px 0 11px;
+    float: left;
+    cursor: pointer
+}
+
+.tabs2 .title {
+    font-size: 15px;
+    color: #7b9c1d !important
+}
+
+.tab2 p {
+    background: none repeat scroll 0 0 rgba(222, 49, 86, 0.1);
+    border: 2px solid rgba(222, 49, 86, 0.3);
+    padding: 5px;
+    border-radius: 3px;
+    color: rgba(222, 49, 86, 0.6) !important;
+    margin: 4px auto 7px;
+    width: 95%;
+    opacity: .8
+}
+
+.alert2 {
+    font: 16px b nazanin,nazanin, tahoma;
+    color: rgba(222, 49, 86, 0.6) !important;
+    background: none repeat scroll 0 0 rgba(222, 49, 86, 0.1) !important;
+    border: 2px solid rgba(222, 49, 86, 0.3) !important;
+    padding: 5px 0;
+    text-align: center;
+    border-radius: 3px
+}
+
+.tabs .active, .tabs .active:hover {
+    background: #fff
+}
+
+.button {
+    font: 16px b nazanin,nazanin, tahoma !important;
+    border: 0 !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    background: #eb6f56 !important;
+    color: #fff !important;
+    padding: 3px 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    transition: all .3s ease-out 0s
+}
+
+.button:hover, .button:focus {
+    border: 0 !important;
+    background: #232323 !important;
+    color: #fff !important
+}
+
+.item {
+    position: relative;
+    padding: 5px 0;
+    border-bottom: 1px solid #f2f2f2;
+    margin-bottom: 6px
+}
+
+.item:last-child {
+    border: 0
+}
+
+.close {
+    cursor: pointer;
+    background: #de3358;
+    color: #FFF;
+    width: 20px;
+    display: inline-block;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    font: 10px/20px tahoma;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .3s ease-out
+}
+
+.close:hover {
+    opacity: .6
+}
+
+#hide {
+    display: none
+}
+
+.footer {
+    background: #f7f7f7;
+    width: 85%;
+    float: left;
+    position: absolute;
+    bottom: 0;
+    height: 45px;
+    left: 0
+}
+
+.footer button, .tab2 button, .backupbutton, .ticketbutton,.requestbutton {
+    background: #666;
+    color: #FFF;
+    border: medium none;
+    padding: 5px 10px;
+    cursor: pointer;
+    float: right;
+    font: 15px b nazanin,nazanin, tahoma;
+    margin: 6px;
+    border-radius: 4px;
+    transition: all .3s ease-out
+}
+
+.footer button:hover, .tab2 button:hover {
+    background: #333;
+}
+
+.footer button:last-child, .tab2 button, .backupbutton {
+    float: left;
+    background: #007ffc;
+}
+
+.tab2 button {
+    margin-top: 0
+}
+
+.footer button:hover:last-child, .backupbutton:hover {
+    background: #0961b7
+}
+
+.chbot {
+    width: 100%;
+
+    /*background: url('img/eastweb.ir.png') no-repeat transparent;*/
+    display: inline-block;
+    text-align: center;
+}
+.chbot img{
+    width:100%;
+}
+.eastweb-about-logo{
+    background: url('img/eastweb.ir.png') no-repeat transparent;
+    background-size: cover;
+
+}
+.center-align{
+    text-align:center !important;
+}
+.tabs .chbot a {
+    background: 0;
+    text-indent: -100%;
+    overflow: hidden
+}
+
+.alert {
+    border: 2px solid rgba(151, 192, 36, 0.4);
+    background: none repeat scroll 0 0 rgba(152, 192, 38, 0.1);
+    padding: 5px 0;
+    text-align: center;
+    border-radius: 3px;
+    font: 15px b nazanin,nazanin, tahoma;
+    color: #7b9c1d !important
+}
+
+.alert a {
+    color: #5d7617
+}
+
+.alert a:hover {
+    color: #37460d
+}
+.alert-danger {
+    border: 2px solid rgba(230, 19, 19, 0.4);
+    background: none repeat scroll 0 0 rgba(192, 71, 38, 0.1);
+    padding: 5px 0;
+    text-align: center;
+    border-radius: 3px;
+    font: 15px b nazanin,nazanin, tahoma;
+    color: #a24615 !important;
+}
+
+.alert-danger a {
+    color: #5d7617
+}
+
+.alert-danger a:hover {
+    color: #37460d
+}
+.conp {
+    text-align: justify !important;
+    color: #888 !important;
+    font: 11px/23px tahoma !important;
+    margin: 0 0 !important;
+    display: none;
+    background: none repeat scroll 0 0 #fafafa;
+    padding: 5px 8px;
+    border-radius: 3px
+}
+
+.conp2 {
+    text-align: justify !important;
+    color: #7b9c1d !important;
+    margin: 0 0 !important;
+    background: #f2f2f2;
+    padding: 4px 6px;
+    border-bottom: 1px solid #fafafa;
+    cursor: pointer
+}
+
+.selected {
+    color: #666 !important
+}
+
+.checkbox {
+    float: left;
+    width: 83px;
+    height: 25px;
+    background: none repeat scroll 0 0 #555;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3) inset, 0px 1px 0 rgba(255, 255, 255, 0.1);
+    margin: 2px 7px 0
+}
+
+.checkbox:after {
+    content: "خاموش";
+    font: 11px/24px tahoma;
+    color: #FFFFFF;
+    position: absolute;
+    right: 6px;
+    z-index: 0
+}
+
+.checkbox:before {
+    content: "روشن";
+    font: 11px/24px tahoma;
+    color: #0cf90c;
+    position: absolute;
+    left: 6px;
+    z-index: 0
+}
+
+.checkbox2:after {
+    content: "خیر"
+}
+
+.checkbox2:before {
+    content: "بلی"
+}
+
+
+.checkbox label {
+    display: block;
+    width: 37px;
+    height: 19px;
+    border-radius: 3px;
+    transition: all .4s ease;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+    background: #fcfff4;
+    background: -webkit-linear-gradient(top, #fcfff4 0, #dfe5d7 40%, #b3bead 100%);
+    background: -moz-linear-gradient(top, #fcfff4 0, #dfe5d7 40%, #b3bead 100%);
+    background: -o-linear-gradient(top, #fcfff4 0, #dfe5d7 40%, #b3bead 100%);
+    background: -ms-linear-gradient(top, #fcfff4 0, #dfe5d7 40%, #b3bead 100%);
+    background: linear-gradient(top, #fcfff4 0, #dfe5d7 40%, #b3bead 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfff4', endColorstr='#b3bead', GradientType=0)
+}
+
+.checkbox input[type="checkbox"]:checked + label {
+    left: 43px
+}
+
+.conp span {
+    font-size: 11px !important;
+    display: inline-block;
+    background: #FFF;
+    padding: 0px 5px;
+    border-radius: 3px;
+}
+
+.conp span a {
+    color: rgba(222, 49, 86, 0.8) !important;
+}
+.etext{
+    font: 16px b nazanin,nazanin, tahoma;
+}
+.ehead,.add-channel-btn-container{
+    font-family: b nazanin,nazanin, tahoma !important;
+}
+.eicon{
+    font-size: large !important;
+    color: gray;
+}
+.dual-col{
+    width:40%;
+    padding:0% 5% 0% 5%;
+    float:right;
+}
+.dual-col input,.dual-col label{
+    float:right !important;
+    width:100% !important;
+}
+.single-col{
+    width:80%;
+    padding:0% 5% 0% 5%;
+    float:right;
+}
+.single-col input,.single-col label{
+    float:right !important;
+    width:100% !important;
+}
+.close-field-btn{
+    margin-top: 10px;
+    color: red;
+    margin-right: 20px;
+}
+.add-channel-btn-container{
+    text-align:center;
+    font-size:18px;
+}
+.night-mode-settings{
+    float:left;
+    text-align: left;
+}
+
+.night-mode-settings input{
+    width:15%;
+}
+.quick-inputs input,.quick-inputs label{
+    width:auto !important;
+
+}
+@media screen and (max-width: 800px) {
+    .fields input, .fields textarea{
+        width:90%;
+    }
+    .night-mode-settings input{
+        width:40%;
+    }
+}
+
