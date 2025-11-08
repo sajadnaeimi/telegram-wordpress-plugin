@@ -1,7 +1,14 @@
 <?php
-/*
-eastweb.ir information structures. all rights reserved 
-*/
+/**
+ * Core Functions for Telegram Channel Bot
+ *
+ * @package Telegram_Channel_Bot
+ */
+
+// If this file is called directly, abort.
+if (!defined('WPINC')) {
+    die;
+}
 function eastweb_send_post_request($url, $params)
 {
 	$post=http_build_query($params);
@@ -34,17 +41,7 @@ function eastweb_wpchannel_bily($url,$chbot_options)
 				return $json['short_link'];
 	return $url;
 }
-function
-eastweb_dashboard_rss_feed() {
-	echo '<div class="rss-widget">';
-	 wp_widget_rss_output(array('url' => 'http://www.eastweb.ir/feed/', 'title' => 'تازه های فناوری', 'items' => 3, 'show_summary' => 1, 'show_author' => 0, 'show_date' => 1));
-	echo '</div>';
-}
 
-function eastweb_dashboard_rss_widget() {
-	global $wp_meta_boxes;
-	wp_add_dashboard_widget( 'eastweb_dashboard_rss_feed', 'تازه های فناوری' , 'eastweb_dashboard_rss_feed' );
-}
 
 
 $wpch_valid_post_type=array("post","download","page","product","portfolio");
@@ -73,7 +70,7 @@ function botscript_chbot_settings($get=true,$new_settings=false){
 	$defaults=array(
 		'token'=>'',
 		'channels'=>'',
-		'sign'=>'eastweb.ir',
+		'sign'=>'',
 		'linkpreview'=>'0',
 		'send_image'=>'',
 		'template'=>'[bot_post_title]
@@ -91,10 +88,7 @@ function botscript_chbot_settings($get=true,$new_settings=false){
 		'post_active'=>'1',
 		'edit_active'=>'0',
 		'active'=>'1',
-		'email'=>'',
-		'key'=>'',
-		'version'=>5.21,
-		'license_activation'=>'0',
+		'version'=>'6.0.0',
 		'channel_pair'=>'',
 		'default_notif'=>FALSE,
 		'default_channel'=>'all',
@@ -207,87 +201,20 @@ function botscript_chbot_settings($get=true,$new_settings=false){
 	$wpch_valid_post_type=explode(',',$defaults['valid_post_types']);
 	return $defaults;
 }
-function update_api($server_settings)
-{
-	$settings=botscript_chbot_settings();
-	if(($server_settings['current_ver']>$settings['version']) && ($server_settings['min_ver']>$settings['version']) && $settings['automaticupdate']==1)
-	{
 
-		$params=array(
-			'last_ver'=>$settings['version'],
-			'ver'=>5.21,
-			'blogname'=>get_option('blogname'),
-			'blogurl'=>get_option('siteurl'),
-			'admin_email'=>get_option('admin_email'),
-			'server_date'=>time(),
-			'email'=>$settings['email'],
-			'key'=>$settings['key'],
-            'settings'=>$settings
-		);
-		if($result=chbot_download_url(get_option('chbot_api_root').'update/',$params))
-			if($data=json_decode($result,true))
-				if($data['ok']==true)
-				{
-					if(isset($data['package']))
-					{
-						$package=chbot_download_url($data['package']);
-						if(file_put_contents('upd.zip',$package))
-						{
-							@$zip = new ZipArchive;
-							@$res = $zip->open('upd.zip');
-							if ($res === TRUE) {
-								$zip->extractTo(dirname(__FILE__));
-								$zip->close();
-								unlink('upd.zip');
-								if(file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'channel-bot-maintenance.php'))
-								{
-									require_once (dirname(__FILE__).DIRECTORY_SEPARATOR.'channel-bot-maintenance.php');
-									unlink(dirname(__FILE__).DIRECTORY_SEPARATOR.'channel-bot-maintenance.php');
-								}
 
-								unlink('upd.zip');
-							}
-
-						}
-					}
-
-				}
-	}
-	if(isset($server_settings['api']) && isset($server_settings['api_root']) && ($server_settings['api_ver']==$settings['version']) && $settings['automaticupdate']==1)
-	{/*if new sent api belongs to this version then update them*/
-		update_option("chbot_api", $server_settings['api']);
-		update_option("chbot_api_root", $server_settings['api_root']);
-	}
-	return false;
-}
-
+/**
+ * Run when plugin is activated
+ * Creates/updates database field with default settings
+ */
 function botscript_chbot_install() {
-/* Creates new database field */
-
-	$settings=botscript_chbot_settings();
-
-	$new_settings=botscript_chbot_settings(false);/*get new defaults*/
-	$merged_settings=array_merge($new_settings,$settings);/**merge old and new settings*/
-    $merged_settings['version']=5.21;
-    $merged_settings['v52merged']=1;
-	botscript_chbot_settings(false,$merged_settings);/*save new settings*/
-
-	update_option("chbot_api", 'https://api.eastweb.ir/wpchannel/v5/');
-	update_option("chbot_api_root", 'https://api.eastweb.ir/wpchannel/');
-
-	$params=array(
-		'last_ver'=>$settings['version'],
-		'ver'=>5.21,
-		'blogname'=>get_option('blogname'),
-		'blogurl'=>get_option('siteurl'),
-		'admin_email'=>get_option('admin_email'),
-		'server_date'=>time()
-	);
-	if($result=chbot_download_url(get_option('chbot_api_root').'install/',$params))
-		if($data=json_decode($result,true))
-			if(isset($data['settings']))
-				update_api($data['settings']);
-
+	$settings = botscript_chbot_settings();
+	
+	$new_settings = botscript_chbot_settings(false); // Get new defaults
+	$merged_settings = array_merge($new_settings, $settings); // Merge old and new settings
+	$merged_settings['version'] = '6.0.0';
+	$merged_settings['v52merged'] = 1;
+	botscript_chbot_settings(false, $merged_settings); // Save new settings
 }
 
 function botscript_chbot_remove() {
@@ -2930,25 +2857,8 @@ function eastweb_wpch_settings_ajax() {
 
         }
         elseif($_POST['operation']=='bily_login'){
-            //use plugin settings to send request[proxies]
+            // Default Bily login link
             $bily_login_link='https://bily.ir/login/';
-            if($settings['license_activation']=='1') {
-                $params=array(
-                    'email'=>$settings['email'],
-                    'key'=>$settings['key'],
-                );
-                if($result=chbot_download_url(get_option('chbot_api_root').'bily_fastlogin_link/true',$params))
-                {
-                    if($data=json_decode($result,true))
-                    {
-                        if($data['ok']==true)
-                        {
-                            $bily_login_link=$data['link'];
-                        }
-
-                    }
-                }
-            }
             $output['ok']=true;//always true
             $output['link']=$bily_login_link;
         }

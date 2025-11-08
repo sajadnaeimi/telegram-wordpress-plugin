@@ -1,8 +1,14 @@
 <?php
-/*
- * EASTWEB.IR ALL RIGHTS RESERVED
- * First and Best WP Telegram Channel Plugin
+/**
+ * Settings Page for Telegram Channel Bot
+ *
+ * @package Telegram_Channel_Bot
  */
+
+// If this file is called directly, abort.
+if (!defined('WPINC')) {
+    die;
+}
 
 function chbot_options() {
     //if is admin must be added instead
@@ -21,138 +27,11 @@ function chbot_options() {
     {
         if($settings=botscript_chbot_settings(false,botscript_chbot_settings(false)))
             $success[]='تنظیمات با موفقیت به حالت پیشفرض درآمد';
-        update_option("chbot_api", 'https://api.eastweb.ir/wpchannel/v5/');
-        update_option("chbot_api_root", 'https://api.eastweb.ir/wpchannel/');
     }
-    if(isset($_POST['request_code']) && isset($_POST['request_email']) && isset($_POST['purchase_code']))
-    {
-        //do something about it
-        //check for activation
-        //send params
-        if (!filter_var($_POST['request_email'], FILTER_VALIDATE_EMAIL) === false)
-        {
-            if(trim($_POST['purchase_code'])!='')
-            {
-                if($settings['license_activation']!='1')
-                {
-                    $params=array(
-                        'ver'=>CHBOT_VER,
-                        'blogname'=>get_option('blogname'),
-                        'blogurl'=>get_option('siteurl'),
-                        'admin_email'=>get_option('admin_email'),
-                        'server_date'=>time(),
-                        'last_ver'=>$settings['version'],
-                        'req_email'=>trim($_POST['request_email']),
-                        'purchase_code'=>trim($_POST['purchase_code'])
-                    );
-                    if($result=chbot_download_url(get_option('chbot_api_root').'request_activation/',$params))
-                    {
-                        if($data=json_decode($result,true))
-                        {
-                            if($data['ok']==true)
-                            {
-                                $success['req_code']='درخواست کد فعال سازی شما ثبت شد، در صورت تایید این درخواست، در چند ساعت آینده یک ایمیل حاوی اطلاعات مربوط به فعال سازی برایتان ارسال خواهد شد. لطفا شکیبا باشید.';
-                            }
-                            else{
-                                if(isset($data['error']))
-                                    $errors['req_code']=$data['error'];
-                                else
-                                    $errors['req_code']='خطا در ثبت درخواست. در صورتی که ایمیلی از سوی شرق وب دریافت نکردید، با مراجعه به وب سایت با ما در ارتباط باشید';
-                            }
-                        }
-                        else {
-                            if(isset($data['error']))
-                                $errors['req_code']=$data['error'];
-                            else
-                                $errors['req_code']='خطا در ثبت درخواست. در صورتی که ایمیلی از سوی شرق وب دریافت نکردید، با مراجعه به وب سایت با ما در ارتباط باشید';
-                        }
-                    }
-                    else {
-                        $errors['req_code']='خطا در ثبت درخواست. در صورتی که ایمیلی از سوی شرق وب دریافت نکردید، با مراجعه به وب سایت با ما در ارتباط باشید';
-                    }
-                }
-                else $errors['req_code']='افزونه از قبل فعال است، نمی توانید مجددا درخواست کد فعال سازی نمایید. برای دستیابی به کد فعال سازی قبلی، به پنل کاربری خود در شرق وب مراجعه کنید. <a href="https://billing.eastweb.ir/" target="_blank">برای ورود کلیک کنید.</a>';
-            }
-            else $errors['req_code']='لطفا شماره سفارش را به شکل صحیح وارد کنید';
 
-        }
-        else $errors['req_code']='لطفا ایمیل خود را به شکل صحیح وارد کنید';
-
-    }
-    if(isset($_POST['send_ticket']) && isset($_POST['ticket']))
-    {
-        //do something about it
-        //check for activation
-        //send params
-        if(trim($_POST['ticket'])!='')
-        {
-            if($settings['license_activation']=='1')
-            {
-                $params=array(
-                    'ver'=>CHBOT_VER,
-                    'blogname'=>get_option('blogname'),
-                    'blogurl'=>get_option('siteurl'),
-                    'admin_email'=>get_option('admin_email'),
-                    'server_date'=>time(),
-                    'email'=>$settings['email'],
-                    'key'=>$settings['key'],
-                    'last_ver'=>$settings['version'],
-                    'ticket'=>$_POST['ticket']
-                );
-                if($result=chbot_download_url(get_option('chbot_api_root').'submit_ticket/',$params))
-                {
-                    if($data=json_decode($result,true))
-                    {
-                        if($data['ok']==true)
-                        {
-                            $success['ticket']='تیکت جدید شما ثبت شد، نتیجه پس از بررسی کارشناسان ما، از طریق ایمیل و یا تلگرام(در صورتی که بر روی پروفایل تان فعال شده باشد) به اطلاع شما خواهد رسید';
-                        }
-                        else $errors['ticket']='خطا در ثبت تیکت. لطفا از فعال بودن کد فعال سازی خود اطمینان حاصل نمایید.';
-                    }
-                    else $errors['ticket']='خطا در برقراری ارتباط با سرور. لطفا به پنل کاربری خود در <a title="شرق وب" href="https://eastweb.ir" target="_blank">شرق وب</a> مرجعه کنید.';
-                }
-                else $errors['ticket']='خطا در برقراری ارتباط با سرور. لطفا به پنل کاربری خود در <a title="شرق وب" href="https://eastweb.ir" target="_blank">شرق وب</a> مرجعه کنید.';
-            }
-            else $errors['ticket']='چنانچه قصد ارسال تیکت دارید، ابتدا بایستی افزونه را با دریافت کد فعال سازی فعال نمایید.';
-        }
-        else $errors['ticket']='بدنه تیکت نمی تواند خالی باشد';
-
-    }
     if(isset($_POST['submit']))
     {
         $new_settings=$settings;
-        if(isset($_POST['email']))
-            $new_settings['email']=$_POST['email'];
-        if(isset($_POST['key']))
-            $new_settings['key']=$_POST['key'];
-        if($settings['license_activation']!='1')
-        {
-            $params=array(
-                'ver'=>CHBOT_VER,
-                'blogname'=>get_option('blogname'),
-                'blogurl'=>get_option('siteurl'),
-                'admin_email'=>get_option('admin_email'),
-                'server_date'=>time(),
-                'email'=>$new_settings['email'],
-                'key'=>$new_settings['key'],
-                'last_ver'=>$new_settings['version']
-            );
-            if($result=chbot_download_url(get_option('chbot_api_root').'activation/',$params))
-            {
-                if($data=json_decode($result,true))
-                {
-                    if($data['ok']==true)
-                    {
-                        $new_settings['license_activation']='1';
-                        $success[]='لایسنس افزونه با موفقیت فعال شد';
-                        $_POST['active_tab']='general';
-                    }
-                    else $errors[]='ایمیل و لایسنس کلید فعال سازی وارد شده معتبر نمی باشد. جهت فعال کردن افزونه یک لایسنس معتبر وارد کنید.';
-                }
-                else $errors['ticket']='خطا در برقراری ارتباط با سرور. لطفا به پنل کاربری خود در <a title="شرق وب" href="https://billing.eastweb.ir" target="_blank">شرق وب</a> مرجعه کنید.';
-            }
-            else $errors['ticket']='خطا در برقراری ارتباط با سرور. لطفا به پنل کاربری خود در <a title="شرق وب" href="https://billing.eastweb.ir" target="_blank">شرق وب</a> مرجعه کنید.';
-        }
         if(isset($_POST['channel']) && isset($_POST['channel_cat']))
         {
             $i=0;
@@ -622,19 +501,14 @@ function chbot_options() {
         <form method="post" action="">
             <?php
 
-            $active_tab='activation';
-            if($settings['license_activation']==1)
-                $active_tab='general';
+            $active_tab='general';
             if(isset($_POST['active_tab']))
                 $active_tab=$_POST['active_tab'];
             ?>
-            <input type="text" name="active_tab" id="ew_active_tab" value="<?=(isset($_POST['active_tab'])?$_POST['active_tab']:'activation'); ?>" hidden >
-            <div class="atitle">افزونه کانال خودکار<span>نسخه 5.2.1</span> <span style="background:gainsboro;"><a href="https://eastweb.ir/wp-channel-plugin" target="_blank">دیدن خانه ی افزونه</a></span>&nbsp;<span style="background:gainsboro;"><a href="https://billing.eastweb.ir" target="_blank">پنل کاربری</a></span></div>
+            <input type="text" name="active_tab" id="ew_active_tab" value="<?=(isset($_POST['active_tab'])?$_POST['active_tab']:'general'); ?>" hidden >
+            <div class="atitle">افزونه کانال خودکار تلگرام<span>نسخه 6.0.0</span> <span style="background:gainsboro;"><a href="https://github.com/sajadnaeimi/telegram-wordpress-plugin" target="_blank">صفحه GitHub</a></span></div>
             <div class="wtitle">پنل اختصاصی مدیریت تنظیمات</div>
             <div class="tabs">
-                <?php if($settings['license_activation']!=1): ?>
-                <p id="tabactivation" href="#activation" data-target="activation"><i class="fa fa-check-circle eicon <?=($active_tab=='activation'?'active':'') ?>"></i> فعال سازی</p>
-                <?php endif; ?>
                 <p id="tabgeneral" href="#general" data-target="general"><i class="fa fa-gears eicon <?=($active_tab=='general'?'active':'') ?>"></i> تنظیمات همگانی</p>
                 <p id="tabchannels" href="#channels" data-target="channels"><i class="fa fa-telegram eicon <?=($active_tab=='channels'?'active':'') ?>"></i> کانال ها</p>
                 <p id="tabcontent" href="#content" data-target="content"><i class="fa fa-edit eicon <?=($active_tab=='content'?'active':'') ?>"></i> تنظیمات نوشته</p>
